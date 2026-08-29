@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: 210 40% 98%;
+  --surface: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --muted: 215 16% 47%;
+  --accent: 217 91% 55%;
+  --glass: 0 0% 100%;
+  --line: 214 32% 84%;
+  --highlight: 0 0% 100%;
+  --shadow: 222 47% 11%;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 240 6% 4%;
+  --surface: 240 6% 7%;
+  --foreground: 0 0% 98%;
+  --muted: 240 5% 65%;
+  --accent: 217 91% 60%;
+  --glass: 0 0% 100%;
+  --line: 0 0% 100%;
+  --highlight: 0 0% 100%;
+  --shadow: 0 0% 0%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: hsl(var(--background));
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: hsl(var(--accent) / 0.32);
+  color: hsl(var(--foreground));
+}
+
+/* Grain lembut supaya background gelap tidak terasa datar. */
+.grain::before {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  content: "";
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+/* Kelas reusable untuk efek glass di card dan navbar. */
+.glass-panel {
+  border: 1px solid hsl(var(--line) / 0.45);
+  background:
+    linear-gradient(135deg, hsl(var(--glass) / 0.7), hsl(var(--glass) / 0.24)),
+    hsl(var(--surface) / 0.58);
+  box-shadow: inset 0 1px 0 hsl(var(--highlight) / 0.12), 0 24px 80px hsl(var(--shadow) / 0.16);
+  backdrop-filter: blur(28px);
+}
+
+.dark .grain::before {
+  opacity: 0.12;
+}
+
+.dark .glass-panel {
+  border-color: hsl(var(--line) / 0.08);
+  background:
+    linear-gradient(135deg, hsl(var(--glass) / 0.09), hsl(var(--glass) / 0.035)),
+    hsl(var(--glass) / 0.06);
+  box-shadow: inset 0 1px 0 hsl(var(--highlight) / 0.08), 0 24px 80px hsl(var(--shadow) / 0.28);
+}
+
+.hero-ambient {
+  background:
+    radial-gradient(circle at 20% 15%, hsl(var(--accent) / 0.2), transparent 34%),
+    radial-gradient(circle at 78% 4%, hsl(170 75% 58% / 0.18), transparent 28%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%);
+}
+
+.dark .hero-ambient {
+  background:
+    radial-gradient(circle at 20% 15%, hsl(var(--accent) / 0.24), transparent 34%),
+    radial-gradient(circle at 80% 0%, hsl(var(--foreground) / 0.1), transparent 28%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%);
+}
+
+.section-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.section-spacing {
+  padding-block: 96px;
+}
+
+.section-eyebrow {
+  margin-bottom: 16px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: hsl(var(--accent));
+}
+
+.section-title {
+  max-width: 760px;
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.body-copy {
+  max-width: 600px;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: hsl(var(--muted));
+}
+
+.hero-title {
+  max-width: 980px;
+  font-size: clamp(72px, 8vw, 110px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.mouse-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.mouse-light::after {
+  position: absolute;
+  inset: var(--light-y, 50%) auto auto var(--light-x, 50%);
+  width: 260px;
+  height: 260px;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(circle, hsl(var(--accent) / 0.22), transparent 68%);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 220ms ease;
+}
+
+.mouse-light:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .section-spacing {
+    padding-block: 96px;
+  }
+
+  .hero-title {
+    font-size: clamp(56px, 7vw, 84px);
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-bottom: max(96px, calc(84px + env(safe-area-inset-bottom)));
+  }
+
+  .section-shell {
+    width: min(100% - 32px, 1180px);
+  }
+
+  .section-spacing {
+    padding-block: 64px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .hero-title {
+    font-size: clamp(42px, 6vw, 58px);
+  }
+}
