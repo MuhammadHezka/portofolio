@@ -16,7 +16,7 @@ export function ContactSection() {
                 Let&apos;s build something precise.
               </h2>
               <p className="body-copy mt-8">
-                Tell me the idea, problem, or product you want to build. I'll help turn it into a clear system.</p>
+                Tell me the idea, problem, or product you want to build. I&apos;ll help turn it into a clear system.</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 {socials.map((social) => {
                   const Icon = social.icon;
