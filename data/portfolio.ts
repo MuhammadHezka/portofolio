@@ -3,9 +3,9 @@ import type { Project, SocialLink, TimelineItem } from "@/types/portfolio";
 
 export const stats = [
   { label: "Years Learning", value: "3+" },
-  { label: "Projects", value: "15" },
+  { label: "Projects", value: "10+" },
   { label: "Clients", value: "10+" },
-  { label: "Years of Experience", value: "2+" }
+  { label: "Years of Experience", value: "1+" }
 ];
 
 export const projects: Project[] = [

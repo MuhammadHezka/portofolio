@@ -41,6 +41,24 @@ body {
   overflow-x: hidden;
 }
 
+/* Pemisah halus antar-section: garis gradien dengan glow yang tidak mengambil ruang layout. */
+main > section + section {
+  position: relative;
+}
+
+main > section + section::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(980px, calc(100% - 64px));
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.16) 18%, hsl(var(--line) / 0.72) 50%, hsl(var(--accent) / 0.16) 82%, transparent);
+  box-shadow: 0 1px 16px hsl(var(--accent) / 0.12);
+  transform: translateX(-50%);
+}
+
 ::selection {
   background: hsl(var(--accent) / 0.32);
   color: hsl(var(--foreground));
@@ -190,5 +208,9 @@ body {
 
   .hero-title {
     font-size: clamp(42px, 6vw, 58px);
+  }
+
+  main > section + section::before {
+    width: calc(100% - 48px);
   }
 }
