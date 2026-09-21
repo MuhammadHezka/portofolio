@@ -4,9 +4,10 @@ export type Project = {
   title: string;
   category: string;
   description: string;
+  details?: string;
   image: string;
   tech: string[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl: string;
   size: "large" | "wide" | "tall" | "small";
 };

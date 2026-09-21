@@ -1,11 +1,24 @@
-import { ExternalLink, Github } from "lucide-react";
+"use client";
+
+import { FileText, Github } from "lucide-react";
 import Image from "next/image";
+import { useRef, useState } from "react";
+import { ProjectDetailModal } from "@/components/projects/project-detail-modal";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
 import { projects } from "@/data/portfolio";
+import type { Project } from "@/types/portfolio";
 
 export function ProjectsSection() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const lastTrigger = useRef<HTMLButtonElement>(null);
+
+  function closeModal() {
+    setSelectedProject(null);
+    window.setTimeout(() => lastTrigger.current?.focus(), 0);
+  }
+
   return (
     <section id="projects" className="section-spacing">
       <div className="section-shell">
@@ -54,10 +67,15 @@ export function ProjectsSection() {
                     ))}
                   </div>
                   <div className="mt-6 flex flex-wrap gap-3 pt-1">
-                    <Button asChild className="min-h-11 px-5 sm:px-[22px]">
-                      <a href={project.liveUrl} aria-label={`View live demo for ${project.title}`}>
-                        <ExternalLink size={16} /> Live Demo
-                      </a>
+                    <Button
+                      type="button"
+                      className="min-h-11 px-5 sm:px-[22px]"
+                      onClick={(event) => {
+                        lastTrigger.current = event.currentTarget;
+                        setSelectedProject(project);
+                      }}
+                    >
+                      <FileText size={16} /> Description
                     </Button>
                     <Button asChild variant="ghost" className="min-h-11 px-5 sm:px-[22px]">
                       <a href={project.githubUrl} aria-label={`View GitHub repository for ${project.title}`}>
@@ -71,6 +89,7 @@ export function ProjectsSection() {
           ))}
         </div>
       </div>
+      <ProjectDetailModal project={selectedProject} onClose={closeModal} />
     </section>
   );
 }

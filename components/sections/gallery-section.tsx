@@ -1,9 +1,21 @@
+"use client";
+
 import Image from "next/image";
+import { useRef, useState } from "react";
+import { ContentPreview, ContentPreviewModal } from "@/components/ui/content-preview-modal";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
 import { gallery } from "@/data/portfolio";
 
 export function GallerySection() {
+  const [selectedItem, setSelectedItem] = useState<ContentPreview | null>(null);
+  const lastTrigger = useRef<HTMLButtonElement>(null);
+
+  function closeModal() {
+    setSelectedItem(null);
+    window.setTimeout(() => lastTrigger.current?.focus(), 0);
+  }
+
   return (
     <section id="gallery" className="section-spacing">
       <div className="section-shell">
@@ -17,6 +29,15 @@ export function GallerySection() {
           {gallery.map((item, index) => (
             <Reveal key={item.src} delay={index * 0.08} scale>
               <GlassCard className="group overflow-hidden p-3">
+                <button
+                  type="button"
+                  className="block w-full rounded-[20px] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                  onClick={(event) => {
+                    lastTrigger.current = event.currentTarget;
+                    setSelectedItem({ title: item.caption, eyebrow: "Gallery", image: item.src });
+                  }}
+                  aria-label={`Open ${item.caption}`}
+                >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[20px]">
                   <Image
                     src={item.src}
@@ -30,11 +51,13 @@ export function GallerySection() {
                     <p className="text-sm">{item.caption}</p>
                   </div>
                 </div>
+                </button>
               </GlassCard>
             </Reveal>
           ))}
         </div>
       </div>
+      <ContentPreviewModal item={selectedItem} onClose={closeModal} />
     </section>
   );
 }

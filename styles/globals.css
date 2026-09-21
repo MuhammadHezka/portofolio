@@ -64,17 +64,6 @@ main > section + section::before {
   color: hsl(var(--foreground));
 }
 
-/* Grain lembut supaya background gelap tidak terasa datar. */
-.grain::before {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  content: "";
-  opacity: 0.08;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='.55'/%3E%3C/svg%3E");
-}
-
 /* Kelas reusable untuk efek glass di card dan navbar. */
 .glass-panel {
   border: 1px solid hsl(var(--line) / 0.45);
@@ -83,10 +72,6 @@ main > section + section::before {
     hsl(var(--surface) / 0.58);
   box-shadow: inset 0 1px 0 hsl(var(--highlight) / 0.12), 0 24px 80px hsl(var(--shadow) / 0.16);
   backdrop-filter: blur(28px);
-}
-
-.dark .grain::before {
-  opacity: 0.12;
 }
 
 .dark .glass-panel {
@@ -110,6 +95,30 @@ main > section + section::before {
     radial-gradient(circle at 80% 0%, hsl(var(--foreground) / 0.1), transparent 28%),
     linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%);
 }
+
+.project-modal-backdrop { position: fixed; z-index: 80; inset: 0; display: grid; place-items: center; padding: 24px; background: hsl(var(--shadow) / .26); backdrop-filter: blur(16px) saturate(112%); -webkit-backdrop-filter: blur(16px) saturate(112%); }
+.project-modal { position: relative; width: min(720px, 100%); max-height: calc(100vh - 48px); overflow: auto; overscroll-behavior: contain; border: 1px solid hsl(var(--line) / .34); border-radius: 30px; background: linear-gradient(145deg, hsl(var(--glass) / .82), hsl(var(--surface) / .69)); box-shadow: inset 0 1px 0 hsl(var(--highlight) / .56), 0 30px 100px hsl(var(--shadow) / .36); backdrop-filter: blur(30px) saturate(125%); -webkit-backdrop-filter: blur(30px) saturate(125%); }
+.dark .project-modal { border-color: hsl(var(--line) / .12); background: linear-gradient(145deg, hsl(var(--glass) / .12), hsl(var(--surface) / .82)); box-shadow: inset 0 1px 0 hsl(var(--highlight) / .1), 0 30px 100px hsl(var(--shadow) / .56); }
+.project-modal-image { position: relative; height: clamp(200px, 34vw, 310px); overflow: hidden; border-radius: 29px 29px 0 0; }
+.project-modal-image::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, hsl(var(--shadow) / .04) 18%, hsl(var(--shadow) / .74) 100%); pointer-events: none; }
+.project-modal-close { position: absolute; z-index: 2; top: 16px; right: 16px; display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid hsl(var(--highlight) / .28); border-radius: 50%; color: hsl(var(--foreground)); background: hsl(var(--surface) / .5); box-shadow: 0 8px 20px hsl(var(--shadow) / .14); backdrop-filter: blur(14px); transition: transform 180ms ease, background 180ms ease; }
+.project-modal-close:hover { transform: scale(1.06); background: hsl(var(--surface) / .78); }
+.project-modal-close:active { transform: scale(.95); }
+.project-modal-close:focus-visible { outline: 2px solid hsl(var(--accent)); outline-offset: 3px; }
+.project-modal-image-copy { position: absolute; z-index: 1; right: 24px; bottom: 22px; left: 24px; max-width: 580px; color: white; text-shadow: 0 2px 18px hsl(var(--shadow) / .35); }
+.project-modal-content { padding: 25px 32px 32px; }
+.project-modal-category { margin: 0; font-size: .75rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; color: hsl(var(--accent)); }
+.project-modal h2 { margin: 7px 0 0; font-size: clamp(1.75rem, 4vw, 2.35rem); font-weight: 650; line-height: 1.06; letter-spacing: -.04em; }
+.project-modal-description { margin: 10px 0 0; max-width: 620px; font-size: .96rem; font-weight: 500; line-height: 1.55; color: hsl(0 0% 100% / .9); }
+.project-modal-details { margin: 0; font-size: .94rem; line-height: 1.65; color: hsl(var(--muted)); }
+.project-modal-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.project-modal-tech span { padding: 7px 11px; border: 1px solid hsl(var(--line) / .45); border-radius: 999px; background: hsl(var(--foreground) / .045); color: hsl(var(--muted)); font-size: .78rem; font-weight: 600; }
+.project-modal-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.project-modal-actions a { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 17px; border: 1px solid hsl(var(--line) / .55); border-radius: 999px; color: hsl(var(--foreground)); background: hsl(var(--foreground) / .05); font-size: .875rem; font-weight: 600; transition: transform 180ms ease, background 180ms ease; }
+.project-modal-actions a:hover { transform: translateY(-1px); background: hsl(var(--foreground) / .1); }
+
+@media (max-width: 640px) { .project-modal-backdrop { padding: 12px; } .project-modal { max-height: calc(100vh - 24px); border-radius: 24px; } .project-modal-image { height: 250px; border-radius: 23px 23px 0 0; } .project-modal-image-copy { right: 18px; bottom: 18px; left: 18px; } .project-modal-content { padding: 24px 20px 26px; } .project-modal-close { top: 12px; right: 12px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
 .section-shell {
   width: min(1180px, calc(100% - 32px));

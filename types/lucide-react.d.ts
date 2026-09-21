@@ -29,4 +29,5 @@ declare module "lucide-react" {
   export const Send: LucideIcon;
   export const Sun: LucideIcon;
   export const UserRound: LucideIcon;
+  export const X: LucideIcon;
 }
