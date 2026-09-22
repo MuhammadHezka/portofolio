@@ -2,10 +2,10 @@ import { Github, Instagram, Linkedin, Mail } from "lucide-react";
 import type { Project, SocialLink, TimelineItem } from "@/types/portfolio";
 
 export const stats = [
-  { label: "Years Learning", value: "3+" },
+  { label: "Years Learning", value: "2+" },
   { label: "Projects", value: "10+" },
   { label: "Clients", value: "10+" },
-  { label: "Years of Experience", value: "1+" }
+  { label: "Years Experience", value: "1+" }
 ];
 
 export const projects: Project[] = [
