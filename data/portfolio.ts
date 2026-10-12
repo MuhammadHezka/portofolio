@@ -3,8 +3,8 @@ import type { Project, SocialLink, TimelineItem } from "@/types/portfolio";
 
 export const stats = [
   { label: "Years Learning", value: "2+" },
-  { label: "Projects", value: "10+" },
-  { label: "Clients", value: "10+" },
+  { label: "Projects", value: "5+" },
+  { label: "Clients", value: "5+" },
   { label: "Years Experience", value: "1+" }
 ];
 
@@ -58,18 +58,14 @@ export const projects: Project[] = [
 
 export const skills = [
   "Java",
-  "Spring Boot",
   "Laravel",
   "React",
   "Next.js",
   "TypeScript",
   "Tailwind",
   "Python",
-  "TensorFlow",
   "MySQL",
-  "PostgreSQL",
-  "Docker",
-  "AWS",
+  "MariaDB",
   "Prompt Engineering"
 ];
 
@@ -109,12 +105,12 @@ export const gallery = [
     caption: "AI research notes"
   },
   {
-    src: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=900&auto=format&fit=crop",
-    caption: "Code and craft"
+    src: "/images/project-ai.jpeg",
+    caption: "project with codex CLI"
   },
   {
-    src: "/images/gallery-three.jpeg",
-    caption: "Quiet thinking space"
+    src: "/images/hez-linux.jpeg",
+    caption: "Explore Linux and open source"
   }
 ];
 
@@ -153,7 +149,6 @@ export const posts = [
 
 export const socials: SocialLink[] = [
   { label: "Github", href: "https://github.com/MuhammadHezka", icon: Github },
-  { label: "LinkedIn", href: "https://linkedin.com/", icon: Linkedin },
   { label: "Instagram", href: "https://instagram.com/hszkaa_", icon: Instagram },
   { label: "Email", href: "muhammadhezka@gmail.com", icon: Mail }
 ];

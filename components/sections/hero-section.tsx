@@ -78,7 +78,7 @@ export function HeroSection() {
         <GlassCard className="mx-auto w-full max-w-[420px] p-4">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[20px]">
             <Image
-              src="/images/hez-profile.jpeg"
+              src="/images/profile-update.jpeg"
               alt="Portrait placeholder for Muhammad Hezka"
               fill
               priority
